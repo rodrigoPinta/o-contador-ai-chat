@@ -9,13 +9,12 @@
     const THEME_STORAGE_KEY = 'contador-ia-theme';
     const THEME_ATTRIBUTE = 'data-theme';
     const htmlElement = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
 
     /**
      * Get the current theme
      */
     function getCurrentTheme() {
-        return htmlElement.getAttribute(THEME_ATTRIBUTE) || 'light';
+        return htmlElement.getAttribute(THEME_ATTRIBUTE) || 'dark';
     }
 
     /**
@@ -49,22 +48,12 @@
     }
 
     /**
-     * Get system preference
-     */
-    function getSystemPreference() {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-        return 'light';
-    }
-
-    /**
      * Initialize theme on page load
      */
     function initTheme() {
         const savedTheme = getSavedTheme();
-        const systemPreference = getSystemPreference();
-        const theme = savedTheme || systemPreference;
+        // Default to dark theme if no saved preference
+        const theme = savedTheme || 'dark';
         
         setTheme(theme);
     }
@@ -72,46 +61,75 @@
     /**
      * Toggle between light and dark themes
      */
-    function toggleTheme() {
+    function toggleTheme(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
         const currentTheme = getCurrentTheme();
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
+        console.log('Toggle theme:', currentTheme, '->', newTheme); // Debug
+        
         setTheme(newTheme);
         saveTheme(newTheme);
+        
+        console.log('Theme set to:', htmlElement.getAttribute(THEME_ATTRIBUTE)); // Debug
     }
 
     /**
-     * Listen for system theme changes
+     * Initialize theme toggle button
+     * Retries if element not found (for robustness)
      */
-    function watchSystemTheme() {
-        if (window.matchMedia) {
-            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    function initThemeToggle() {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            console.log('Theme toggle button found'); // Debug
             
-            mediaQuery.addEventListener('change', (e) => {
-                // Only apply system preference if user hasn't set a preference
-                const savedTheme = getSavedTheme();
-                if (!savedTheme) {
-                    const newTheme = e.matches ? 'dark' : 'light';
-                    setTheme(newTheme);
+            // Use a named function to allow proper removal if needed
+            function handleToggleClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleTheme(e);
+            }
+            
+            // Remove any existing listener first (if it exists)
+            themeToggle.removeEventListener('click', handleToggleClick);
+            
+            // Add the listener
+            themeToggle.addEventListener('click', handleToggleClick);
+            
+            console.log('Theme toggle listener attached'); // Debug
+            return true;
+        }
+        console.warn('Theme toggle button not found'); // Debug
+        return false;
+    }
+
+    /**
+     * Initialize everything
+     */
+    function init() {
+        initTheme();
+        
+        // Try to initialize toggle button
+        if (!initThemeToggle()) {
+            // Retry after a short delay if button not found
+            setTimeout(() => {
+                if (!initThemeToggle()) {
+                    console.warn('Theme toggle button not found after retry');
                 }
-            });
+            }, 100);
         }
     }
 
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            initTheme();
-            watchSystemTheme();
-        });
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        initTheme();
-        watchSystemTheme();
-    }
-
-    // Attach toggle handler
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
+        // DOM already ready
+        init();
     }
 })();
 
@@ -134,9 +152,17 @@
 
         const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
         const newState = !isExpanded;
+        const isMobile = window.innerWidth <= 768;
 
         menuToggle.setAttribute('aria-expanded', newState);
-        navMenu.setAttribute('aria-hidden', !newState);
+        
+        // Only use aria-hidden on mobile
+        // On desktop, keep aria-hidden="false" to allow interaction with buttons
+        if (isMobile) {
+            navMenu.setAttribute('aria-hidden', !newState ? 'true' : 'false');
+        } else {
+            navMenu.setAttribute('aria-hidden', 'false');
+        }
 
         // Prevent body scroll when menu is open
         if (newState) {
@@ -152,8 +178,18 @@
     function closeMenu() {
         if (!menuToggle || !navMenu) return;
 
+        const isMobile = window.innerWidth <= 768;
+
         menuToggle.setAttribute('aria-expanded', 'false');
-        navMenu.setAttribute('aria-hidden', 'true');
+        
+        // Only set aria-hidden on mobile
+        // On desktop, keep aria-hidden="false" to allow interaction
+        if (isMobile) {
+            navMenu.setAttribute('aria-hidden', 'true');
+        } else {
+            navMenu.setAttribute('aria-hidden', 'false');
+        }
+        
         document.body.style.overflow = '';
     }
 
@@ -185,9 +221,20 @@
     function initMenu() {
         if (!menuToggle || !navMenu) return;
 
+        // Check if we're on mobile or desktop
+        const isMobile = window.innerWidth <= 768;
+
         // Set initial state
         menuToggle.setAttribute('aria-expanded', 'false');
-        navMenu.setAttribute('aria-hidden', 'true');
+        
+        // Only set aria-hidden on mobile (where menu can be hidden)
+        // On desktop, menu is always visible, so aria-hidden should be false
+        // This prevents blocking interaction with buttons inside nav-menu (like theme-toggle)
+        if (isMobile) {
+            navMenu.setAttribute('aria-hidden', 'true');
+        } else {
+            navMenu.setAttribute('aria-hidden', 'false');
+        }
 
         // Attach toggle handler
         menuToggle.addEventListener('click', toggleMenu);
@@ -211,7 +258,17 @@
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                if (window.innerWidth > 768) {
+                const isMobileNow = window.innerWidth <= 768;
+                
+                // Update aria-hidden based on screen size
+                if (isMobileNow) {
+                    // On mobile, use aria-hidden to control visibility
+                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    navMenu.setAttribute('aria-hidden', !isExpanded ? 'true' : 'false');
+                } else {
+                    // On desktop, menu is always visible - set aria-hidden to false
+                    // This allows interaction with buttons inside nav-menu
+                    navMenu.setAttribute('aria-hidden', 'false');
                     closeMenu();
                 }
             }, 250);

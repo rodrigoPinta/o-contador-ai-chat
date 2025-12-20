@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador IA Chat — CPC / IFRS</title>
+    <title>O Contador Chat IA — CPC / IFRS</title>
     <meta name="description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional. Projeto de portfólio em IA.">
     <meta name="keywords" content="contador, IA, inteligência artificial, CPC, IFRS, contabilidade, assistente contábil, educação contábil">
     <meta name="author" content="Rodrigo Gimenez Maracajá">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Contador IA Chat — CPC / IFRS (PT-BR)">
+    <meta property="og:title" content="O Contador Chat IA — CPC / IFRS (PT-BR)">
     <meta property="og:description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional.">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contador IA Chat — CPC / IFRS (PT-BR)">
+    <meta name="twitter:title" content="O Contador Chat IA — CPC / IFRS (PT-BR)">
     <meta name="twitter:description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS.">
     
     <!-- Prevenir FOUC - aplicar tema antes do render -->
@@ -41,8 +41,7 @@
             }
             
             const savedTheme = getSavedTheme();
-            const systemPreference = getSystemPreference();
-            const theme = savedTheme || systemPreference;
+            const theme = savedTheme || 'dark';
             htmlElement.setAttribute(THEME_ATTRIBUTE, theme);
         })();
     </script>
@@ -53,7 +52,7 @@
     <nav class="navbar" role="navigation" aria-label="Navegação principal">
         <div class="container">
             <div class="nav-content">
-                <div class="logo">Contador IA Chat <span class="logo-accent">CPC / IFRS</span></div>
+                <div class="logo">O Contador Chat IA <span class="logo-accent">CPC / IFRS</span></div>
                 <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" id="menu-toggle">
                     <span class="menu-toggle-icon"></span>
                     <span class="menu-toggle-icon"></span>
@@ -88,8 +87,7 @@
                         Projeto de Portfólio em IA
                     </div>
                     <h1 class="hero-title">
-                        Contador IA Chat<br>
-                        <span class="hero-subtitle">CPC / IFRS (PT-BR)</span>
+                        O Contador Chat IA <span class="hero-subtitle">CPC / IFRS (PT-BR)</span>
                     </h1>
                     <p class="hero-description">
                         Um assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional — não um chatbot genérico.
@@ -103,7 +101,30 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="f19c8120-b8da-4b83-9ddb-99a6b17e6c26.png" alt="Rede de inteligência artificial representando conexões entre dados contábeis e normas CPC/IFRS" class="hero-img">
+                    <div id="chat-demo" class="chat-demo">
+                        <div class="chat-message chat-message-user">
+                            <div class="chat-message-avatar">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 9C12.7614 9 15 6.76142 15 4C15 1.23858 12.7614 -1 10 -1C7.23858 -1 5 1.23858 5 4C5 6.76142 7.23858 9 10 9Z" fill="currentColor"/>
+                                    <path d="M10 11C5.58172 11 2 13.6863 2 17V19H18V17C18 13.6863 14.4183 11 10 11Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="chat-message-content">
+                                <div class="chat-message-text"></div>
+                            </div>
+                        </div>
+                        <div class="chat-message chat-message-ai">
+                            <div class="chat-message-avatar">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 2L2 7L10 12L18 7L10 2Z" fill="currentColor"/>
+                                    <path d="M2 9L10 14L18 9V15L10 20L2 15V9Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="chat-message-content">
+                                <div class="chat-message-text"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,7 +219,7 @@
                     </ul>
                 </div>
                 <div class="comparison-panel comparison-panel-positive">
-                    <h3 class="comparison-title">Contador IA Chat CPC / IFRS</h3>
+                    <h3 class="comparison-title">O Contador Chat IA CPC / IFRS</h3>
                     <ul class="comparison-list">
                         <li>Impõe autoridade contábil com CPC / IFRS como fonte exclusiva</li>
                         <li>Mantém metodologia de saída estruturada e educacional</li>
@@ -275,7 +296,7 @@
         <div class="container">
             <div class="footer-content">
                 <p class="footer-text">
-                    Contador IA Chat — CPC / IFRS (PT-BR)<br>
+                    O Contador Chat IA — CPC / IFRS (PT-BR)<br>
                     Projeto educacional em IA com foco em contabilidade brasileira.
                 </p>
                 <p class="footer-disclaimer">
@@ -295,5 +316,6 @@
         </div>
     </footer>
     <script src="theme.js"></script>
+    <script src="chat-demo.js"></script>
 </body>
 </html>
