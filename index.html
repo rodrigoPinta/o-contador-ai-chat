@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador IA Chat — CPC / IFRS</title>
+    <meta name="description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional. Projeto de portfólio em IA.">
+    <meta name="keywords" content="contador, IA, inteligência artificial, CPC, IFRS, contabilidade, assistente contábil, educação contábil">
+    <meta name="author" content="Rodrigo Gimenez Maracajá">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contador IA Chat — CPC / IFRS (PT-BR)">
+    <meta property="og:description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional.">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contador IA Chat — CPC / IFRS (PT-BR)">
+    <meta name="twitter:description" content="Assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS.">
+    
+    <!-- Prevenir FOUC - aplicar tema antes do render -->
+    <script>
+        (function() {
+            const THEME_STORAGE_KEY = 'contador-ia-theme';
+            const THEME_ATTRIBUTE = 'data-theme';
+            const htmlElement = document.documentElement;
+            
+            function getSavedTheme() {
+                try {
+                    return localStorage.getItem(THEME_STORAGE_KEY);
+                } catch (e) {
+                    return null;
+                }
+            }
+            
+            function getSystemPreference() {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            }
+            
+            const savedTheme = getSavedTheme();
+            const systemPreference = getSystemPreference();
+            const theme = savedTheme || systemPreference;
+            htmlElement.setAttribute(THEME_ATTRIBUTE, theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" role="navigation" aria-label="Navegação principal">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">Contador IA Chat <span class="logo-accent">CPC / IFRS</span></div>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" id="menu-toggle">
+                    <span class="menu-toggle-icon"></span>
+                    <span class="menu-toggle-icon"></span>
+                    <span class="menu-toggle-icon"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#funcionalidades" class="nav-link">Funcionalidades</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#funcionalidades" class="btn-primary-nav">Ver Projeto</a></li>
+                    <li>
+                        <button class="theme-toggle" aria-label="Alternar tema" id="theme-toggle">
+                            <svg class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3V1M10 19V17M17 10H19M1 10H3M16.364 3.636L14.95 5.05M5.05 14.95L3.636 16.364M16.364 16.364L14.95 14.95M5.05 5.05L3.636 3.636M14 10C14 12.2091 12.2091 14 10 14C7.79086 14 6 12.2091 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <svg class="theme-icon theme-icon-dark" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.293 13.293C16.3785 14.2075 15.2348 14.8616 14.0001 15.1809C12.7654 15.5002 11.4803 15.4756 10.2583 15.1099C9.0363 14.7442 7.91852 14.0478 7.01381 13.0875C6.1091 12.1272 5.44852 10.9336 5.09269 9.62522C4.73686 8.31685 4.69747 6.93609 4.97811 5.60819C5.25875 4.28029 5.85078 3.04394 6.69971 2.00001C5.40979 2.45846 4.26675 3.25472 3.38014 4.30787C2.49353 5.36102 1.89098 6.63697 1.63666 8.00001C1.38234 9.36305 1.48405 10.7714 1.93121 12.0869C2.37837 13.4024 3.15859 14.5828 4.20096 15.5145C5.24333 16.4462 6.51311 17.0993 7.88976 17.4094C9.26641 17.7195 10.7057 17.6772 12.0622 17.2867C13.4187 16.8962 14.6512 16.1681 15.636 15.1713C16.6208 14.1745 17.3268 12.9409 17.691 11.5863" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Projeto de Portfólio em IA
+                    </div>
+                    <h1 class="hero-title">
+                        Contador IA Chat<br>
+                        <span class="hero-subtitle">CPC / IFRS (PT-BR)</span>
+                    </h1>
+                    <p class="hero-description">
+                        Um assistente contábil educacional baseado em IA, fundamentado nas normas CPC / IFRS, projetado para raciocinar como um contador profissional — não um chatbot genérico.
+                    </p>
+                    <p class="hero-supporting">
+                        Este projeto de portfólio demonstra capacidades avançadas de IA em inteligência contábil e raciocínio normativo, desenvolvido para profissionais que exigem precisão e contexto.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#funcionalidades" class="btn-primary">Explorar Funcionalidades</a>
+                        <a href="#sobre" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="f19c8120-b8da-4b83-9ddb-99a6b17e6c26.png" alt="Rede de inteligência artificial representando conexões entre dados contábeis e normas CPC/IFRS" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: O Que Esta IA Faz -->
+    <section id="funcionalidades" class="section section-gray" aria-labelledby="funcionalidades-title">
+        <div class="container">
+            <h2 id="funcionalidades-title" class="section-title">O Que Esta IA Faz</h2>
+            <p class="section-intro">
+                Projetada para raciocinar como um contador experiente, entregando respostas precisas e estruturadas fundamentadas nas normas contábeis brasileiras.
+            </p>
+            <div class="cards-grid cards-grid-2x2" role="list">
+                <div class="card" role="listitem">
+                    <h3 class="card-title">Base de Conhecimento Exclusiva em CPCs / IFRS</h3>
+                    <p class="card-text">
+                        Responde questões contábeis baseando-se exclusivamente nas normas brasileiras CPC / IFRS — sem mistura de frameworks ou orientações conflitantes.
+                    </p>
+                </div>
+                <div class="card" role="listitem">
+                    <h3 class="card-title">Compreensão por Contexto Temático</h3>
+                    <p class="card-text">
+                        Entende o assunto da pergunta através de raciocínio semântico, não por simples correspondência de palavras-chave.
+                    </p>
+                </div>
+                <div class="card" role="listitem">
+                    <h3 class="card-title">Controle de Autoridade Normativa</h3>
+                    <p class="card-text">
+                        Aplica a norma contábil correta como autoridade primária, garantindo respostas precisas e fundamentadas.
+                    </p>
+                </div>
+                <div class="card" role="listitem">
+                    <h3 class="card-title">Saída Educacional Estruturada</h3>
+                    <p class="card-text">
+                        Produz explicações seguindo a metodologia Definição → Reconhecimento → Aplicação.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Principais Diferenciais -->
+    <section class="section section-gray" aria-labelledby="diferenciais-title">
+        <div class="container">
+            <h2 id="diferenciais-title" class="section-title">Principais Diferenciais</h2>
+            <p class="section-subtitle">
+                O que diferencia esta IA dos modelos de linguagem de propósito geral
+            </p>
+            <div class="cards-grid cards-grid-2cols" role="list">
+                <div class="card-feature" role="listitem">
+                    <h3 class="card-feature-title">Raciocínio por Contexto</h3>
+                    <p class="card-feature-text">
+                        Compreensão semântica profunda, não apenas correspondência de palavras-chave.
+                    </p>
+                </div>
+                <div class="card-feature" role="listitem">
+                    <h3 class="card-feature-title">Controle de Autoridade Normativa</h3>
+                    <p class="card-feature-text">
+                        Aplicação rigorosa da norma contábil correta como autoridade primária.
+                    </p>
+                </div>
+                <div class="card-feature" role="listitem">
+                    <h3 class="card-feature-title">Explicações Educacionais</h3>
+                    <p class="card-feature-text">
+                        Metodologia estruturada: Definição → Reconhecimento → Aplicação.
+                    </p>
+                </div>
+                <div class="card-feature" role="listitem">
+                    <h3 class="card-feature-title">Contexto Brasileiro por Design</h3>
+                    <p class="card-feature-text">
+                        Construída especificamente para o contexto contábil brasileiro.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Por Que Isso É Diferente do ChatGPT -->
+    <section class="section section-gray">
+        <div class="container">
+            <h2 class="section-title">Por Que Isso É Diferente de Chats Genéricos</h2>
+            <p class="section-subtitle">
+                LLMs genéricos não foram projetados para precisão contábil. Este sistema foi.
+            </p>
+            <div class="comparison">
+                <div class="comparison-panel comparison-panel-negative">
+                    <h3 class="comparison-title">LLMs Genéricos</h3>
+                    <ul class="comparison-list">
+                        <li>Misturam conceitos de diferentes frameworks contábeis (IFRS, US GAAP, normas locais)</li>
+                        <li>Fornecem autoridade normativa inconsistente</li>
+                        <li>Geram respostas plausíveis, porém potencialmente incorretas</li>
+                    </ul>
+                </div>
+                <div class="comparison-panel comparison-panel-positive">
+                    <h3 class="comparison-title">Contador IA Chat CPC / IFRS</h3>
+                    <ul class="comparison-list">
+                        <li>Impõe autoridade contábil com CPC / IFRS como fonte exclusiva</li>
+                        <li>Mantém metodologia de saída estruturada e educacional</li>
+                        <li>Comporta-se como um contador especialista explicando para colegas</li>
+                        <li>Precisão de 95% nas respostas contábeis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Construída para Escalar -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Construída para Escalar</h2>
+            <p class="section-subtitle">
+                Projetada com arquitetura que suporta expansão futura através dos CPCs / IFRS com regras de autoridade rigorosas mantidas em todo o sistema.
+            </p>
+            <div class="cards-grid cards-grid-3">
+                <div class="card">
+                    <h3 class="card-title">Arquitetura Modular</h3>
+                    <p class="card-text">
+                        Suporta expansão incremental de cobertura de CPCs / IFRS
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Inteligência de Divulgação</h3>
+                    <p class="card-text">
+                        Framework pronto para análise de requisitos de divulgação
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Consistência de Autoridade</h3>
+                    <p class="card-text">
+                        Controle normativo rigoroso em todas as expansões
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Um Projeto de Portfólio & Pesquisa -->
+    <section id="sobre" class="section section-gray">
+        <div class="container">
+            <h2 class="section-title">Um Projeto de Portfólio & Pesquisa</h2>
+            <p class="section-intro">
+                Este é um projeto de portfólio em IA focado em demonstrar a interseção entre inteligência artificial e expertise contábil profissional.
+            </p>
+            <div class="cards-grid cards-grid-3">
+                <div class="card">
+                    <h3 class="card-title">Engenharia de IA</h3>
+                    <p class="card-text">
+                        Demonstra engenharia de prompts avançada e design de IA específico para domínio
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Expertise Contábil</h3>
+                    <p class="card-text">
+                        Construída com profundo entendimento das normas CPC / IFRS e prática profissional
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Foco Educacional</h3>
+                    <p class="card-text">
+                        Projetada para ensinar e explicar, não apenas responder perguntas
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Contador IA Chat — CPC / IFRS (PT-BR)<br>
+                    Projeto educacional em IA com foco em contabilidade brasileira.
+                </p>
+                <p class="footer-disclaimer">
+                    Este é um projeto de pesquisa e portfólio. Não reivindica aprovação regulatória ou automação contábil completa.
+                </p>
+                <p class="footer-disclaimer">
+                    Para fins legais nós não coletamos dados pessoais.
+                </p>
+                <p class="footer-disclaimer">
+                    Este protótipo foi criado por Rodrigo Gimenez Maracajá, de contador para contador.<br>
+                    <a href="mailto:rodrigogmaracaja@gmail.com">rodrigogmaracaja@gmail.com</a>
+                </p>
+                <p class="footer-disclaimer">
+                    Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="theme.js"></script>
+</body>
+</html>
