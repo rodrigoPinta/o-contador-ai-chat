@@ -70,12 +70,8 @@
         const currentTheme = getCurrentTheme();
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
-        console.log('Toggle theme:', currentTheme, '->', newTheme); // Debug
-        
         setTheme(newTheme);
         saveTheme(newTheme);
-        
-        console.log('Theme set to:', htmlElement.getAttribute(THEME_ATTRIBUTE)); // Debug
     }
 
     /**
@@ -85,8 +81,6 @@
     function initThemeToggle() {
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
-            console.log('Theme toggle button found'); // Debug
-            
             // Use a named function to allow proper removal if needed
             function handleToggleClick(e) {
                 e.preventDefault();
@@ -100,10 +94,9 @@
             // Add the listener
             themeToggle.addEventListener('click', handleToggleClick);
             
-            console.log('Theme toggle listener attached'); // Debug
             return true;
         }
-        console.warn('Theme toggle button not found'); // Debug
+        console.warn('Theme toggle button not found');
         return false;
     }
 

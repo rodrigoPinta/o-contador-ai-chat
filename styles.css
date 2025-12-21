@@ -126,7 +126,9 @@ body {
 }
 
 /* Navigation Bar */
+/* Calculate navbar height: padding (1rem top + 1rem bottom) + logo line-height (~1.875rem) + border (1px) ≈ 4rem */
 .navbar {
+    --navbar-height: calc(var(--spacing-sm) * 2 + 1.875rem + 1px);
     background-color: var(--nav-bg);
     border-bottom: 1px solid var(--nav-border);
     padding: var(--spacing-sm) 0;
@@ -204,8 +206,10 @@ body {
     border: none;
     cursor: pointer;
     padding: var(--spacing-xs);
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     justify-content: center;
     align-items: center;
     color: var(--text-primary);
@@ -880,7 +884,7 @@ body {
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        gap: var(--spacing-sm);
+        gap: 0.75rem;
     }
 
     .cards-grid-2x2,
@@ -919,7 +923,7 @@ body {
     
     .nav-menu {
         position: fixed;
-        top: 60px;
+        top: var(--navbar-height, 4rem);
         left: 0;
         right: 0;
         background-color: var(--nav-bg);
@@ -949,14 +953,29 @@ body {
     .nav-menu a,
     .nav-link {
         display: block;
-        padding: var(--spacing-sm) var(--spacing-md);
+        padding: 0.875rem var(--spacing-md);
         width: 100%;
         text-align: center;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .btn-primary-nav {
         width: 100%;
         text-align: center;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-menu .theme-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .chat-demo {
@@ -985,7 +1004,7 @@ body {
     }
 
     .hero {
-        padding: var(--spacing-xl) 0;
+        padding: var(--spacing-lg) 0 var(--spacing-xl);
     }
 
     .hero-title {
@@ -1005,7 +1024,7 @@ body {
     }
 
     .section {
-        padding: var(--spacing-xl) 0;
+        padding: var(--spacing-lg) 0;
     }
 
     .section-title {
@@ -1020,6 +1039,10 @@ body {
         min-width: 200px;
     }
 
+    .card {
+        padding: var(--spacing-lg);
+    }
+
     .chat-demo {
         padding: var(--spacing-sm);
         gap: var(--spacing-sm);
@@ -1027,6 +1050,16 @@ body {
 
     .chat-message-text {
         font-size: 0.8125rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .logo {
+        font-size: 1.125rem;
     }
 }
 
